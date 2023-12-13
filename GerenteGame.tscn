@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="GerenteGame" type="Node2D"]
+
+[node name="BackGround" type="Sprite" parent="."]
+position = Vector2( 509.875, 307.5 )
+scale = Vector2( 2.80068, 2.64783 )
