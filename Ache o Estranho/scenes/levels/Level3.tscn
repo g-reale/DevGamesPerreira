@@ -1,0 +1,159 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/backgrounds/level bg.png" type="Texture" id=1]
+[ext_resource path="res://assets/levels/level 3/caterpillar.png" type="Texture" id=2]
+[ext_resource path="res://assets/levels/level 3/flower.png" type="Texture" id=3]
+[ext_resource path="res://assets/levels/level 3/butterfly.png" type="Texture" id=4]
+[ext_resource path="res://assets/levels/level 3/bee.png" type="Texture" id=5]
+[ext_resource path="res://assets/levels/level 3/dragonfly.png" type="Texture" id=6]
+[ext_resource path="res://assets/levels/level 3/ladybug.png" type="Texture" id=7]
+[ext_resource path="res://assets/levels/level 3/grasshopper.png" type="Texture" id=8]
+[ext_resource path="res://assets/levels/level 3/fly.png" type="Texture" id=9]
+[ext_resource path="res://scripts/levels/Level3.gd" type="Script" id=10]
+
+[node name="Level3" type="Node2D"]
+script = ExtResource( 10 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 518, 298.5 )
+scale = Vector2( 1.01172, 1.01833 )
+texture = ExtResource( 1 )
+
+[node name="Normals" type="Node2D" parent="."]
+position = Vector2( -1, 0 )
+
+[node name="1" type="Node2D" parent="Normals"]
+position = Vector2( -23, -24 )
+scale = Vector2( 1.2, 1.2 )
+
+[node name="Sprite" type="Sprite" parent="Normals/1"]
+position = Vector2( 128.921, 128 )
+scale = Vector2( 0.256318, 0.289593 )
+texture = ExtResource( 5 )
+
+[node name="Button" type="Button" parent="Normals/1"]
+margin_left = 65.0
+margin_top = 64.0
+margin_right = 193.0
+margin_bottom = 192.0
+flat = true
+
+[node name="2" type="Node2D" parent="Normals"]
+position = Vector2( 353, -16 )
+scale = Vector2( 1.2, 1.2 )
+
+[node name="Sprite" type="Sprite" parent="Normals/2"]
+position = Vector2( 128, 128 )
+scale = Vector2( 0.285078, 0.232727 )
+texture = ExtResource( 4 )
+
+[node name="Button" type="Button" parent="Normals/2"]
+margin_left = 65.0
+margin_top = 64.0
+margin_right = 193.0
+margin_bottom = 192.0
+flat = true
+
+[node name="3" type="Node2D" parent="Normals"]
+position = Vector2( 769, -32 )
+scale = Vector2( 1.2, 1.2 )
+
+[node name="Sprite" type="Sprite" parent="Normals/3"]
+position = Vector2( 84.0002, 137.28 )
+scale = Vector2( 0.305455, 0.49581 )
+texture = ExtResource( 2 )
+
+[node name="Button" type="Button" parent="Normals/3"]
+margin_top = 72.0
+margin_right = 168.0
+margin_bottom = 200.0
+flat = true
+
+[node name="4" type="Node2D" parent="Normals"]
+position = Vector2( 177, 176 )
+scale = Vector2( 1.2, 1.2 )
+
+[node name="Sprite" type="Sprite" parent="Normals/4"]
+position = Vector2( 104, 137.28 )
+scale = Vector2( 0.365714, 0.49581 )
+texture = ExtResource( 6 )
+
+[node name="Button" type="Button" parent="Normals/4"]
+margin_left = 40.0
+margin_top = 72.0
+margin_right = 168.0
+margin_bottom = 200.0
+flat = true
+
+[node name="5" type="Node2D" parent="Normals"]
+position = Vector2( 17, 344 )
+scale = Vector2( 1.2, 1.2 )
+
+[node name="Sprite" type="Sprite" parent="Normals/5"]
+position = Vector2( 104, 128 )
+scale = Vector2( 0.256, 0.330749 )
+texture = ExtResource( 9 )
+
+[node name="Button" type="Button" parent="Normals/5"]
+margin_left = 40.0
+margin_top = 64.0
+margin_right = 168.0
+margin_bottom = 192.0
+flat = true
+
+[node name="6" type="Node2D" parent="Normals"]
+position = Vector2( 409, 328 )
+scale = Vector2( 1.2, 1.2 )
+
+[node name="Sprite" type="Sprite" parent="Normals/6"]
+position = Vector2( 96.6667, 133.333 )
+scale = Vector2( 0.361905, 0.388727 )
+texture = ExtResource( 8 )
+
+[node name="Button" type="Button" parent="Normals/6"]
+margin_left = 32.0
+margin_top = 64.0
+margin_right = 160.0
+margin_bottom = 192.0
+flat = true
+
+[node name="7" type="Node2D" parent="Normals"]
+position = Vector2( 769, 336 )
+scale = Vector2( 1.2, 1.2 )
+
+[node name="Sprite" type="Sprite" parent="Normals/7"]
+position = Vector2( 104, 128 )
+scale = Vector2( 0.256, 0.507936 )
+texture = ExtResource( 7 )
+
+[node name="Button" type="Button" parent="Normals/7"]
+margin_left = 40.0
+margin_top = 64.0
+margin_right = 168.0
+margin_bottom = 192.0
+flat = true
+
+[node name="Odd" type="Node2D" parent="."]
+position = Vector2( 480, 552 )
+scale = Vector2( 1.2, 1.2 )
+
+[node name="Sprite" type="Sprite" parent="Odd"]
+position = Vector2( 192.346, -184.828 )
+scale = Vector2( 1.07889, 0.810345 )
+texture = ExtResource( 3 )
+
+[node name="RightButton" type="Button" parent="Odd"]
+margin_left = 128.0
+margin_top = -248.0
+margin_right = 256.0
+margin_bottom = -120.0
+flat = true
+
+[connection signal="pressed" from="Normals/1/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Normals/2/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Normals/3/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Normals/4/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Normals/5/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Normals/6/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Normals/7/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Odd/RightButton" to="." method="_on_RightButton_pressed"]
