@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsom25jw0dgrx"]
+
+[ext_resource type="Script" path="res://game/game.gd" id="1_fl0x4"]
+[ext_resource type="PackedScene" uid="uid://cw3l6gq6d5bdr" path="res://ui/ui.tscn" id="2_cjwpw"]
+[ext_resource type="PackedScene" uid="uid://dduukdyoo462x" path="res://game/questionBox.tscn" id="3_qto84"]
+[ext_resource type="AudioStream" uid="uid://jwka06yyqw0b" path="res://game/assets/win.wav" id="3_xgpj0"]
+[ext_resource type="Texture2D" uid="uid://blsh6sabqal05" path="res://game/assets/background.png" id="4_7o326"]
+[ext_resource type="Texture2D" uid="uid://colwr8waut0bg" path="res://game/assets/foreground.png" id="5_n04mw"]
+
+[node name="game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fl0x4")
+metadata/_edit_vertical_guides_ = [962.0, 1350.0, 1746.0, 1220.0]
+metadata/_edit_horizontal_guides_ = [655.0, 799.0, 960.0, 332.0, 471.0, 567.0, 745.0, 920.0]
+
+[node name="questionsBox" parent="." instance=ExtResource("3_qto84")]
+z_index = 20
+position = Vector2(165, 799)
+
+[node name="ui" parent="." instance=ExtResource("2_cjwpw")]
+layout_mode = 1
+
+[node name="WinLosePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xgpj0")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -3
+position = Vector2(938, 662)
+texture = ExtResource("4_7o326")
+metadata/_edit_lock_ = true
+
+[node name="Foreground" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(977, 662)
+texture = ExtResource("5_n04mw")
+metadata/_edit_lock_ = true
+
+[connection signal="play" from="ui" to="." method="_on_ui_play"]
+[connection signal="restart" from="ui" to="." method="_on_ui_restart"]

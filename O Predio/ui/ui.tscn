@@ -1,0 +1,232 @@
+[gd_scene load_steps=19 format=3 uid="uid://cw3l6gq6d5bdr"]
+
+[ext_resource type="PackedScene" uid="uid://c2c42oryx5iie" path="res://ui/shakingButton.tscn" id="1_euvm2"]
+[ext_resource type="Script" path="res://ui/ui.gd" id="1_n4v0q"]
+[ext_resource type="Texture2D" uid="uid://dcopuegr54yqy" path="res://ui/assets/botão restart/setinha.png" id="2_dllj8"]
+[ext_resource type="Texture2D" uid="uid://bys7ukdseyx5j" path="res://ui/assets/corações/fazio.png" id="2_ieyiw"]
+[ext_resource type="Texture2D" uid="uid://psqawa4h2cev" path="res://ui/assets/on_off som/caixaSom2.png" id="3_cgagh"]
+[ext_resource type="Script" path="res://ui/life.gd" id="3_cmg6e"]
+[ext_resource type="Texture2D" uid="uid://d34j2qapx05e4" path="res://ui/assets/corações/cheio.png" id="6_31oby"]
+[ext_resource type="Texture2D" uid="uid://bhgsxhvatwb2" path="res://ui/assets/botão jogar/jogar completo.png" id="8_rxidx"]
+[ext_resource type="Texture2D" uid="uid://kabs64d7y1un" path="res://ui/assets/corações/metade.png" id="10_fbdjm"]
+[ext_resource type="Script" path="res://ui/lifeAnimations.gd" id="11_5f5et"]
+
+[sub_resource type="Animation" id="Animation_fh0dv"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("life:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("10_fbdjm"), ExtResource("2_ieyiw")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("life:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c1aqi"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("life:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("6_31oby"), ExtResource("10_fbdjm")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("life:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_65y07"]
+resource_name = "revive"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("life:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_ieyiw"), ExtResource("6_31oby")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("life:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_36gv8"]
+_data = {
+"die": SubResource("Animation_fh0dv"),
+"hurt": SubResource("Animation_c1aqi"),
+"revive": SubResource("Animation_65y07")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1ha14"]
+
+[sub_resource type="Gradient" id="Gradient_j3fhs"]
+offsets = PackedFloat32Array(0.00692042, 1)
+colors = PackedColorArray(0.47788, 0.47788, 0.47788, 1, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_bl1io"]
+resource_name = "peek"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("particles:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("particles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vv5v5"]
+_data = {
+"peek": SubResource("Animation_bl1io")
+}
+
+[node name="ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n4v0q")
+
+[node name="life" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -281.0
+offset_bottom = 254.0
+grow_horizontal = 0
+texture = ExtResource("10_fbdjm")
+script = ExtResource("3_cmg6e")
+
+[node name="upper" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="restart" parent="upper" instance=ExtResource("1_euvm2")]
+layout_mode = 2
+texture_normal = ExtResource("2_dllj8")
+
+[node name="sound" parent="upper" instance=ExtResource("1_euvm2")]
+layout_mode = 2
+texture_normal = ExtResource("3_cgagh")
+
+[node name="central" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.0
+offset_top = -47.5
+offset_right = 161.0
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="play" parent="central" instance=ExtResource("1_euvm2")]
+layout_mode = 2
+texture_normal = ExtResource("8_rxidx")
+
+[node name="lifeAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_36gv8")
+}
+script = ExtResource("11_5f5et")
+
+[node name="particles" type="CPUParticles2D" parent="."]
+visible = false
+z_index = -1
+material = SubResource("CanvasItemMaterial_1ha14")
+position = Vector2(962, 537)
+emitting = false
+amount = 500
+explosiveness = 0.24
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 128.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 41.67
+initial_velocity_max = 287.57
+angular_velocity_min = -394.29
+angular_velocity_max = -222.86
+damping_min = 0.095
+damping_max = 0.095
+scale_amount_min = 0.0
+scale_amount_max = 12.91
+color = Color(0, 1, 0, 1)
+color_ramp = SubResource("Gradient_j3fhs")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[node name="particleAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vv5v5")
+}
+
+[connection signal="activated" from="upper/restart" to="." method="_on_restart_activated"]
+[connection signal="pressed" from="upper/sound" to="." method="_on_sound_pressed"]
+[connection signal="activated" from="central/play" to="." method="_on_play_activated"]
+[connection signal="desapeared" from="central/play" to="." method="_on_play_desapeared"]

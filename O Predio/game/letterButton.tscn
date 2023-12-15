@@ -1,0 +1,103 @@
+[gd_scene load_steps=13 format=3 uid="uid://6dtr71aysjhm"]
+
+[ext_resource type="FontFile" uid="uid://dg0r7v68tcosm" path="res://game/assets/Sacramento-Regular.ttf" id="1_jp18h"]
+[ext_resource type="Script" path="res://game/letterButton.gd" id="2_0tk8j"]
+[ext_resource type="AudioStream" uid="uid://byiowoioyr552" path="res://game/assets/failure.wav" id="3_4dqy1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ctdt7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yx64s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdcpu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mmte5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_si62n"]
+
+[sub_resource type="Animation" id="Animation_tqfbn"]
+resource_name = "bounce"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 75), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cuta3"]
+_data = {
+"bounce": SubResource("Animation_tqfbn")
+}
+
+[sub_resource type="Animation" id="Animation_t7j10"]
+resource_name = "fadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8d247"]
+_data = {
+"fadeIn": SubResource("Animation_t7j10")
+}
+
+[node name="letter" type="Button"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = -2
+offset_left = -15.0
+offset_top = -74.4736
+offset_right = 19.0
+offset_bottom = 72.5264
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("1_jp18h")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ctdt7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yx64s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cdcpu")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mmte5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_si62n")
+text = "a"
+script = ExtResource("2_0tk8j")
+
+[node name="FailureSucessPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4dqy1")
+
+[node name="BouncePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cuta3")
+}
+
+[node name="FadeInPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8d247")
+}
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="animation_finished" from="BouncePlayer" to="." method="_on_bounce_player_animation_finished"]
+[connection signal="animation_finished" from="FadeInPlayer" to="." method="_clear"]
